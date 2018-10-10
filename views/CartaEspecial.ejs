@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+ 	<head>
+		<title>Saboteur - Partida</title>
+		<meta charset="utf­8"/>
+		<link rel="stylesheet" type="text/css" href="css/cssPrincipal.css">
+	</head>
+	<body>
+		<div id="header" >
+
+			<div class="iz">
+				<IMG id="imagentop" SRC="RecursosGraficosP1/Logo.png"></IMG>
+				
+			</div>
+			<div class="dr">
+				<div class="card" onclick="location.href = 'principal.html'">
+				    <img src="RecursosGraficosP1/img_avatar.png" alt="Avatar" id= "imgCard" >
+				    <% if (!usuario) { %>
+						<h2 id="conect">No estás conectado</h2>
+					<% } else { %>
+						<h2 id="conect"><%= usuario %></h2>
+					<% } %>
+				</div>
+				
+			</div>
+	    </div>
+	    <div id ="cinta">
+	    	<div > 
+	    		<div class="margizq">
+	    			<button class="button" onclick="location.href = 'desconectar.html'"><span>Desconectar</span></button>
+	    			<button class="button" onclick="location.href = 'unirse.html'"><span>Unirse a partida</span></button>
+	    			<button class="button" onclick="location.href = 'crear.html'"><span>Crear partida</span></button>
+	    		</div>
+	    	</div>
+	    </div>
+
+
+
+
+	    <div id ="bienvenida">
+
+			<%error.forEach(function(err){%>
+			<div class="alert">
+			  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+			  <%=err.msg%>
+			</div>
+			<%});%>
+
+	    	<div>
+
+	    		<%if(carta === null){%>
+	    			<h1 class="welcome">Cuando hayas visto la carta, haz click en este botón</h1>
+	    		<%} else if(carta.idCarta === "21"){%>
+	    			<h1 class="welcome">Selecciona una casilla destino para revelar su contenido</h1>
+		    	<%} else if(carta.idCarta === "22"){%>
+	    			<h1 class="welcome">Elimina una gruta</h1>
+		    	<%} else if(carta.idCarta === "23"){%>
+	    			<h1 class="welcome">¿A que jugador quieres arreglarle la herramienta?</h1>
+		    	<%} else{%>
+	    			<h1 class="welcome">¿A que jugador quieres romperle la herramienta?</h1>
+		    	<%}%>
+
+		    	<%if(carta !== null){%>
+	    			<img src="RecursosGraficosP1/<%=carta.nombreCarta%>.png">
+	    		
+		    	<form method="GET" action="descartarCarta.html">
+					<div class="select">
+						<input type="hidden" name="idPart" value = <%= partida%>>
+						<input type="hidden" name="carta" value = <%= carta.idCarta%>>
+					</div>
+					<button class="button" onclick="myform.submit()"><span>Descartar carta</span></button>
+				</form>
+					<button class="button" onclick="location.href='partida.html?idPartida=<%= partida%>'"><span>Volver a escoger carta</span></button>
+				<%}%>
+
+		    </div>
+
+
+		    <%if(mostrarLlegada){%>
+
+		    	<form method="GET" action="cambiarTurno.html">
+					<div class="select">
+						<input type="hidden" name="idPart" value = <%= partida%>>
+						<input type="hidden" name="turno" value = <%= usuario%>>
+					</div>
+					<button class="button" onclick="myform.submit()"><span>Terminar de usar la Lupa</span></button>
+				</form>
+
+				<div>
+
+			    	<h1 class="welcome">Tablero</h1>
+
+			    	<table class = "tablero">
+						<%for(var i = 0; i < 7; i++){%>
+						    	<tr>
+
+							    	<%for(var j = 0; j < 7; j++){%>
+								    	<%if(tablero[i][j] === undefined){%>
+								    		<td><img src=""></td>
+										<%} else {%>
+											<td><img src="RecursosGraficosP1/<%=tablero[i][j].nombreCarta%>.png"></td>
+										<%}%>
+									<%}%>
+								</tr>
+						<%}%>
+					</table>
+
+
+
+			    </div>
+
+		    <%} else if(carta.idCarta === "21" || carta.idCarta === "22"){%>
+			    <div>
+
+			    	<h1 class="welcome">Tablero</h1>
+
+			    	<table class = "tablero">
+			    	<%for(var i = 0; i < 7; i++){%>
+				    	<tr>
+
+				    		<%for(var j = 0; j < 7; j++){%>
+						    	<%if(tablero[i][j] === undefined){%>
+						    		<td><img src=""></td>
+						    	<%} else if(carta.idCarta === "21" && j === 6 && (i === 1 || i === 3 || i === 5)){%>
+									<td class="clickable"><img src="RecursosGraficosP1/<%=tablero[i][j].nombreCarta%>.png" onclick="location.href='lupa.html?idPart=<%=partida%>&f=<%=i%>&c=<%=j%>&idCarta=<%=carta.idCarta%>&pepita=<%=tablero[i][j].idCarta%>'"></td>
+								<%} else if(carta.idCarta === "22"){%>
+									<%if(i === 3 && j === 0){%>
+										<td><img src="RecursosGraficosP1/<%=tablero[i][j].nombreCarta%>.png"></td>
+									<%} else if(j === 6 && (i === 1 || i === 3 || i === 5)){%>
+										<td><img src="RecursosGraficosP1/<%=tablero[i][j].nombreCarta%>.png"></td>
+									<%} else {%>
+										<td class="clickable"><img src="RecursosGraficosP1/<%=tablero[i][j].nombreCarta%>.png" onclick="location.href='bomba.html?idPart=<%=partida%>&f=<%=i%>&c=<%=j%>&idCarta=<%=carta.idCarta%>'"></td>
+								<%}} else {%>
+									<td><img src="RecursosGraficosP1/<%=tablero[i][j].nombreCarta%>.png"></td>
+								<%}%>
+							<%}%>
+
+						</tr>
+					<%}%>
+					
+			    	</table>
+
+
+
+			    </div>
+
+			<%} else {%>
+				<div>
+					<h1 class="welcome">Lista de jugadores</h1>
+
+					<table class="tablaPartidas">
+			    		<tr>
+			    			<th>
+			    				Nombre del jugador
+			    			</th>
+			    			<th>
+			    				Pico
+			    			</th>
+			    		</tr>
+			    		<% lista.forEach(function(user){ %>
+			    		<tr class="celdaPartida">
+
+			    			
+			    			<td>
+			    				<%= user.alias%>
+			    			</td>
+							<td class="botonCelda">
+			    			<%if(carta.idCarta === "24" && user.pico === 1){%>
+			    				<form method="GET" action="actualizarPico.html">
+			    					<div class="select">
+										<input type="hidden" name="idPart" value = <%= partida%>>
+										<input type="hidden" name="idUsuario" value = <%= user.id%>>
+										<input type="hidden" name="idCarta" value = <%= carta.idCarta%>>
+										<input type="hidden" name="pico" value = 0>
+									</div>
+									<button class="button" onclick="myform.submit()"><span>Romper Pico</span></button>
+			    				</form>
+				    		<%} else if(carta.idCarta === "23" && user.pico === 0){%>
+				    			<form method="GET" action="actualizarPico.html">
+			    					<div class="select">
+										<input type="hidden" name="idPart" value = <%= partida%>>
+										<input type="hidden" name="idUsuario" value = <%= user.id%>>
+										<input type="hidden" name="idCarta" value = <%= carta.idCarta%>>
+										<input type="hidden" name="pico" value = 1>
+									</div>
+									<button class="button" onclick="myform.submit()"><span>Arreglar Pico</span></button>
+			    				</form>
+			    			<%} else if(carta.idCarta === "24" && user.pico === 0){%>
+			    				Este usuario ya tiene el pico roto.
+			    			<%} else {%>
+			    				Este usuario ya tiene el pico arreglado.
+			    			<%}%>
+				    		</td>
+			    		</tr>
+			    			<% }); %>
+			    	</table>
+
+				</div>
+			<%}%>
+
+
+
+			<div>
+				<br>
+				<a href="principal.html" class="iz">Volver a la página de usuario</a>
+			</div>
+
+
+	    </div>
+	</body>
+</html>

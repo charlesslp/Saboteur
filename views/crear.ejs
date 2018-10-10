@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+ 	<head>
+		<title>Saboteu - Crear Partidar</title>
+		<meta charset="utf­8"/>
+		<link rel="stylesheet" type="text/css" href="css/cssPrincipal.css">
+	</head>
+	<body>
+		<div id="header" >
+
+			<div class="iz">
+				<IMG id="imagentop" SRC="RecursosGraficosP1/Logo.png"></IMG>
+				
+			</div>
+			<div class="dr">
+				<div class="card" onclick="location.href = 'principal.html'">
+				    <img src="RecursosGraficosP1/img_avatar.png" alt="Avatar" id= "imgCard" >
+				    <% if (!usuario) { %>
+						<h2 id="conect">No estás conectado</h2>
+					<% } else { %>
+						<h2 id="conect"><%= usuario %></h2>
+					<% } %>
+				</div>
+				
+			</div>
+	    </div>
+	    <div id ="cinta">
+	    	<div > 
+	    		<div class="margizq">
+	    			<button class="button" onclick="location.href = 'desconectar.html'"><span>Desconectar</span></button>
+	    			<button class="button" onclick="location.href = 'unirse.html'"><span>Unirse a partida</span></button>
+	    			<button class="button" onclick="location.href = 'crear.html'"><span>Crear partida</span></button>
+	    		</div>
+	    	</div>
+	    </div>
+
+	    <div id ="bienvenida">
+	    
+	    	<%error.forEach(function(err){%>
+			<div class="alert">
+			  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+			  <%=err.msg%>
+			</div>
+			<%});%>
+
+	    	<div>
+	    		<h1 class="welcome">Nueva partida</h1>
+		    	
+		    	<p>Introduce los datos de la partida.</p>
+		    </div>
+
+	    	<form method="POST" action="crearPartida.html">
+		    	<div>
+					<h3>Nombre:<letraroja>*</letraroja></h3>
+					<input class="textbox" type="text" name= "nombrePartida" placeholder="Introduce el nombre de tu partida">
+				</div>
+
+				<div>
+					<h3>Número máximo de jugadores (Entre 3 y 7):<letraroja>*</letraroja></h3>
+					<div class="select">
+						<select name="jugadores">
+							<option value ="3">3 </option>
+							<option value ="4">4 </option>
+							<option value ="5">5 </option>
+							<option value ="6">6 </option>
+							<option value ="7">7 </option>
+						</select>
+					</div>
+				</div>
+
+				<div>
+					<br>
+					<input type="submit" class="button2 button3"  id="btn_terminar" value="Crear Partida">
+				</div>
+			</form>
+
+			<div>
+				<br>
+				<a href="principal.html" class="iz">Volver a la página de usuario</a>
+			</div>
+
+
+	    </div>
+	</body>
+</html>

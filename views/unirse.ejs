@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+ 	<head>
+		<title>Saboteur - Unirse a partida</title>
+		<meta charset="utf­8"/>
+		<link rel="stylesheet" type="text/css" href="css/cssPrincipal.css">
+	</head>
+	<body>
+		<div id="header" >
+
+			<div class="iz">
+				<IMG id="imagentop" SRC="RecursosGraficosP1/Logo.png"></IMG>
+				
+			</div>
+			<div class="dr">
+				<div class="card" onclick="location.href = 'principal.html'">
+				    <img src="RecursosGraficosP1/img_avatar.png" alt="Avatar" id= "imgCard">
+				    <% if (!usuario) { %>
+						<h2 id="conect">No estás conectado</h2>
+					<% } else { %>
+						<h2 id="conect"><%= usuario %></h2>
+					<% } %>
+				</div>
+				
+			</div>
+	    </div>
+	    <div id ="cinta">
+	    	<div > 
+	    		<div class="margizq">
+	    			<button class="button" onclick="location.href = 'desconectar.html'"><span>Desconectar</span></button>
+	    			<button class="button" onclick="location.href = 'unirse.html'"><span>Unirse a partida</span></button>
+	    			<button class="button" onclick="location.href = 'crear.html'"><span>Crear partida</span></button>
+	    		</div>
+	    	</div>
+	    </div>
+
+	    <div id ="bienvenida">
+
+	    	<%error.forEach(function(err){%>
+			<div class="alert">
+			  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+			  <%=err.msg%>
+			</div>
+			<%});%>
+	    	<h1 class="welcome">Unirse a partida</h1>
+
+		    <p>A continuación se muestra una lista con las partidas abiertas que admiten jugadores.</p>
+
+
+	    	<div>
+
+	    		<% if(partidasAbiertas.length !== 0) { %>
+		    	<table class="tablaPartidas">
+		    		<tr>
+		    			<th>
+		    				Nombre
+		    			</th>
+		    			<th>
+		    				Fecha
+		    			</th>
+		    			<th>
+		    				Máximo de jugadores
+		    			</th>
+		    			<th>
+		    				Jugadores apuntados
+		    			</th>
+		    		</tr>
+		    		<% partidasAbiertas.forEach(function(partida){ %>
+		    		<tr class="celdaPartida">
+		    			<td>
+		    				<%= partida.nombrePartida%>
+		    			</td>
+		    			<td>
+		    				<%= partida.fecha.getDate()%> / <%= partida.fecha.getMonth() + 1%> / <%= (partida.fecha.getFullYear())%>
+		    			</td>
+		    			<td>
+		    				<%= partida.jugadores%>
+		    			</td>
+		    			<td>
+		    				<%= partida.jugadoresApuntados%>
+		    			</td>
+		    			<td class="botonCelda">
+		    				<form method="POST" action="unirseAPartida.html">
+		    					<div class="select">
+									<input type="hidden" name="idPart" value = <%= partida.id%>>
+								</div>
+								<button class="button" onclick="myform.submit()"><span>Unirse</span></button>
+		    				</form>
+		    			</td>
+		    		</tr>
+		    		<% }); %>
+		    	</table>
+		    	<% } else { %>
+		    	<p class="noexiste">No existen partidas abiertas</p>
+		    	<% } %>
+	    	</div>
+
+
+			<div>
+				<br>
+				<a href="principal.html" class="iz" >Volver a la página de usuario</a>
+			</div>
+
+
+	    </div>
+	</body>
+</html>

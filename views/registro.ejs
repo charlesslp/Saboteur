@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+ 	<head>
+		<title>Saboteur - Registro</title>
+		<meta charset="utf­8"/>
+		<link rel="stylesheet" type="text/css" href="css/cssPrincipal.css">
+
+		<link rel="stylesheet" type="text/css" href="/src/css/jscal2.css" />
+    <link rel="stylesheet" type="text/css" href="/src/css/border-radius.css" />
+    <link rel="stylesheet" type="text/css" href="/src/css/steel/steel.css" />
+    <script type="text/javascript" src="/src/js/jscal2.js"></script>
+    <script type="text/javascript" src="/src/js/lang/es.js"></script>
+
+
+	</head>
+	<body>
+		<div id="header" >
+
+			<div class="iz">
+				<IMG id="imagentop" SRC="RecursosGraficosP1/Logo.png"></IMG>
+				
+			</div>
+			<div class="dr">
+				<h2 id="conect">No estás conectado</h2>
+			</div>
+	    </div>
+	    <div id ="cinta">
+	    	<div > 
+	    		<div class="margizq">
+	    			<button class="button" onclick="location.href = 'login.html'"><span>Login</span></button>
+	    			<button class="button" onclick="location.href = 'registro.html'"><span>Nuevo Usuario</span></button>
+	    		</div>
+	    	</div>
+	    </div>
+
+	    <div id ="bienvenida">
+
+			<%error.forEach(function(err){%>
+			<div class="alert">
+			  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+			  <%=err.msg%>
+			</div>
+			<%});%>
+
+	    	<h1 class="welcome">Nuevo usuario</h1>
+	    	<p>Introduce tus datos de usuario. Los campos marcados con (<letraroja>*</letraroja>) son obligatorios;</p>
+
+
+
+
+	    	<form method="POST" action="crearUsuario.html" enctype="multipart/form-data">
+		    	<div>
+					<h3>Nombre de usuario: <letraroja>*</letraroja><br></h3>
+					<input class="textbox" type="text" name= "alias" placeholder="Introduce tu nombre de usuario">
+				</div>
+
+				<div>
+					<h3>Contraseña: <letraroja>*</letraroja><br></h3>
+					<input class="textbox" type="password" name= "contraseña" placeholder="Introduce tu contraseña">
+				</div>
+
+				<div>
+					<h3>Nombre completo: <letraroja>*</letraroja><br></h3>
+					<input class="textbox" type="text" name= "nombre_completo" placeholder="Introduce tu nombre completo">
+				</div>
+
+				<div>
+					<h3>Sexo: <letraroja>*</letraroja><br></h3>
+					 <input id="sexo" type="radio" name="sex" value="h"> Hombre </input>
+					 <input id="sexo" type="radio" name="sex" value="m"> Mujer </input>
+				</div>
+
+				<div>
+					<h3>Foto:<br></h3>
+					<input type="file" name="foto" id="examinar">
+				</div>
+		    	
+		    	<div>
+					<h3>Fecha de nacimiento:<br></h3>
+					
+					<input type="date" placeholder="Introduce tu fecha de nacimiento" name="fecha">
+
+				</div>
+
+				<div>
+					<br>
+					<br>
+					<br>
+					<input type="submit" class="button2 button3"  id="btn_grande" value="Crear cuenta de usuario">
+				</div>
+			</form>
+
+
+
+			<div>
+				<br>
+				<a href="index.html" class="iz">Volver a la página principal</a>
+			</div>
+
+	    </div>
+	</body>
+</html>

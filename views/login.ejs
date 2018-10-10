@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+ 	<head>
+		<title>Saboteur - Login</title>
+		<meta charset="utf­8"/>
+		<link rel="stylesheet" type="text/css" href="css/cssPrincipal.css">
+	</head>
+	<body>
+		<div id="header" >
+
+			<div class="iz">
+				<IMG id="imagentop" SRC="RecursosGraficosP1/Logo.png"></IMG>
+				
+			</div>
+			<div class="dr">
+				<h2 id="conect">No estás conectado</h2>
+			</div>
+	    </div>
+	    <div id ="cinta">
+	    	<div > 
+	    		<div class="margizq">
+	    			<button class="button" onclick="location.href = 'login.html'"><span>Login</span></button>
+	    			<button class="button" onclick="location.href = 'registro.html'"><span>Nuevo Usuario</span></button>
+	    		</div>
+	    	</div>
+	    </div>
+
+	    <div id ="bienvenida">
+
+			<%error.forEach(function(err){%>
+			<div class="alert">
+			  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+			  <%=err.msg%>
+			</div>
+			<%});%>
+	        
+	    	<h1 class="welcome">Ingreso en el sistema</h1>
+	    	
+
+
+	    	<form method="POST" action="buscarUsuario.html">
+		    	<div>
+					<h3>Nombre de usuario:</h3>
+					<input class="textbox" type="text" name= "alias" placeholder="Introduce tu nombre de usuario">
+				</div>
+
+				<div>
+					<h3>Contraseña:</h3>
+					<input class="textbox" type="password" name= "contraseña" placeholder="Introduce tu contraseña">
+				</div>
+
+				<div>
+					<br>
+					<input type="submit" class="button2 button3"  id="btn_terminar" value="Identificar">
+				</div>
+			</form>
+
+			
+	    </div>
+	</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+ 	<head>
+		<title>Saboteur - Principal</title>
+		<meta charset="utf­8"/>
+		<link rel="stylesheet" type="text/css" href="css/cssPrincipal.css">
+	</head>
+	<body>
+		<div id="header" >
+
+			<div class="iz">
+				<IMG id="imagentop" SRC="RecursosGraficosP1/Logo.png"></IMG>
+				
+			</div>
+			<div class="dr">
+				<div class="card" onclick="location.href = 'principal.html'">
+				    <img src="RecursosGraficosP1/img_avatar.png" alt="Avatar" id= "imgCard">
+				    <% if (!usuario) { %>
+						<h2 id="conect">No estás conectado</h2>
+					<% } else { %>
+						<h2 id="conect"><%= usuario %></h2>
+					<% } %>
+				</div>
+				
+			</div>
+	    </div>
+	    <div id ="cinta">
+	    	<div > 
+	    		<div class="margizq">
+	    			<button class="button" onclick="location.href = 'desconectar.html'"><span>Desconectar</span></button>
+	    			<button class="button" onclick="location.href = 'unirse.html'"><span>Unirse a partida</span></button>
+	    			<button class="button" onclick="location.href = 'crear.html'"><span>Crear partida</span></button>
+	    		</div>
+	    	</div>
+	    </div>
+
+
+
+
+	    <div id ="bienvenida">
+
+
+			<%error.forEach(function(err){%>
+			<div class="alert">
+			  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+			  <%=err.msg%>
+			</div>
+			<%});%>
+
+	    	<% if (!usuario) { %>
+	    		<h1 class="welcome">Bienvenido!</h1>
+			<% } else { %>
+	    		<h1 class="welcome">Bienvenido, <%= usuario %>!</h1>
+			<% } %>
+	    	<div>
+		    	<h2 class="welcome">Partidas abiertas</h2>
+		    	
+		    	<p>Las siguientes partidas han sido creadas por ti, pero aún están a la espera de recibir más jugadores.</p>
+
+		    	<% if(partidasAbiertas.length !== 0) { %>
+		    	<table class="tablaPartidas">
+		    		<tr>
+		    			<th>
+		    				Nombre
+		    			</th>
+		    			<th>
+		    				Fecha
+		    			</th>
+		    			<th>
+		    				Número de jugadores
+		    			</th>
+		    		</tr>
+		    		<% partidasAbiertas.forEach(function(partida){ %>
+		    		<tr class="celdaPartida">
+
+		    			
+		    			<td>
+		    				<%= partida.nombrePartida%>
+		    			</td>
+		    			<td>
+		    				<%= partida.fecha.getDate()%> / <%= partida.fecha.getMonth() + 1%> / <%= (partida.fecha.getFullYear())%>
+
+		    			</td>
+		    			<td>
+		    				<%= partida.jugadoresActuales%> / <%= partida.jugadores%>
+		    			</td>
+		    			<td class="botonCelda">
+		    				<form method="GET" action="empezarPartida.html">
+		    					<div class="select">
+									<input type="hidden" name="idPart" value = <%= partida.id%>>
+									<input type="hidden" name="jugadoresActuales" value = <%= partida.jugadoresActuales%>>
+								</div>
+								<button class="button" onclick="myform.submit()"><span>Empezar partida</span></button>
+		    				</form>
+		    			</td>
+		    		</tr>
+		    			<% }); %>
+		    	</table>
+		    	<% } else { %>
+		    	<p class="noexiste">No existen partidas abiertas</p>
+		    	<% } %>
+
+	    	</div>
+
+			<hr/>
+
+	    	<div>
+
+		    	<h2 class="welcome">Partidas activas</h2>
+		    	
+		    	<p>Haz click en el título de una partida para ver su estado actual.</p>
+		    	<p>Se marcan resaltadas las partidas en las que es tu turno.</p>
+
+		    	<% if(partidasActivas.length !== 0) { %>
+		    	<table class="tablaPartidas">
+		    		<tr>
+		    			<th>
+		    				Nombre
+		    			</th>
+		    			<th>
+		    				Usuario creador
+		    			</th>
+		    			<th>
+		    				Fecha
+		    			</th>
+		    			<th>
+		    				Turno
+		    			</th>
+		    		</tr>
+		    		<% partidasActivas.forEach(function(partida){ if(usuario === partida.turno){  %>
+		    		<tr class="tuTurno">
+		    		<% } else { %>
+		    		<tr>
+		    		<% } %>
+		    			<td>
+
+		    				<a class="enlaceTabla" href=<%= "partida.html?idPartida=" + partida.id %>><strong><%= partida.nombrePartida%></strong></a>
+
+		    			</td>
+		    			<td>
+		    				<%= partida.usuarioCreador%>
+		    			</td>
+		    			<td>
+		    				<%= partida.fecha.getDate()%> / <%= partida.fecha.getMonth() + 1%> / <%= (partida.fecha.getFullYear())%>
+		    			</td>
+		    			<td>
+		    				<%= partida.turno%>
+		    			</td>
+		    		</tr>
+		    		<% }); %>
+		    	</table>
+
+		    	<% } else { %>
+		    	<p class="noexiste">No existen partidas abiertas</p>
+		    	<% } %>
+
+	    	</div>
+
+	    	<hr/>
+	    	
+	    	<div>
+		    	<h2 class="welcome">Partidas terminadas</h2>
+		    	
+		    	<p>Las siguientes ya han finalizado</p>
+
+
+		    	<% if(partidasTerminadas.length !== 0) { %>
+		    	<table class="tablaPartidas">
+		    		<tr>
+		    			<th>
+		    				Nombre
+		    			</th>
+		    			<th>
+		    				Usuario creador
+		    			</th>
+		    			<th>
+		    				¿Has ganado?
+		    			</th>
+		    		</tr>
+		    		<% partidasTerminadas.forEach(function(partida){ %>
+		    		<tr>
+		    			<td>
+		    				<a class="enlaceTabla" href=<%= "partida.html?idPartida=" + partida.id %>><strong><%= partida.nombrePartida%></strong></a>
+		    			</td>
+		    			<td>
+		    				<%= partida.usuarioCreador%>
+		    			</td>
+		    			<td>
+		    				<% if(partida.esGanador){ %>
+		    				Si
+		    				<% } else { %>
+		    				No
+		    				<% } %>
+		    			</td>
+		    		</tr>
+		    		<% }); %>
+		    	</table>
+		    	<% } else { %>
+		    	<p class="noexiste">No existen partidas terminadas</p>
+		    	<% } %>
+	    	</div>
+
+
+	    </div>
+	</body>
+</html>

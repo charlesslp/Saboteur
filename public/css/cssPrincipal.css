@@ -1,0 +1,371 @@
+
+html { 
+  background: url(../RecursosGraficosP1/madera4.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /*font-family: Gill Sans, Verdana;*/
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  /*font-family: "Lucida Console", Monaco, monospace;*/
+}
+#header{
+	top:50px;
+	background: green;
+  margin: 40px;
+}
+#cinta {
+ background-image: url(../RecursosGraficosP1/tira.jpg);
+ border:solid black;
+ float: left;
+ width: 100%;
+}
+
+#imagentop{
+	width: 50%;
+}
+
+.dr{
+	float:right;
+	width: 25%;
+	background: rgba(248, 175, 26, 0.52);
+	border-radius: 15px;
+	margin-top: 20px;
+	margin-bottom: 15px;
+}
+.iz{
+	float:left;
+	width: 75%;
+}
+#conect{
+	padding: 10px;
+	
+	color:white;
+	
+	float:right;
+}
+
+.margizq{
+	margin-left: 30px;
+}
+
+#bienvenida{
+  top: 50px;
+  margin: 40px;
+  background: rgba(22, 23, 21, 0.71);
+  position: relative;
+  color: #FFF;
+  float: left;
+  width: 90%;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-bottom: 50px;
+}
+
+.welcome{
+  border-left: solid #FFF;
+  padding-left: 15px;
+}
+
+letraroja{
+  color: #ED7500;
+}
+
+input[type=text], input[type=password], input[type=date]{
+	width: 45%;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+     display: inline-block;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+    font-size: 20px;
+}
+
+.select {
+  overflow:hidden;
+   width:350px;
+   -moz-border-radius: 9px 9px 9px 9px;
+   -webkit-border-radius: 9px 9px 9px 9px;
+   border-radius: 9px 9px 9px 9px;
+   box-shadow: 1px 1px 11px #330033;
+   background: #f4511e;
+}
+  .select select {
+    border: 0;
+   color: black;
+   background: transparent;
+   font-size: 20px;
+   font-weight: bold;
+   padding: 2px 10px;
+   width: 378px;
+   *width: 350px;
+   *background: #58B14C;
+   -webkit-appearance: none;
+  }
+
+
+ &::-webkit-clear-button {
+    font-size: 40px;
+    height: 30px;
+    position: relative;
+    right: 5px;
+    margin-right: 4px;
+
+  }
+
+#imgCard{
+	width: 35%;
+	border-radius: 15px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
+}
+
+
+.alert {
+    margin: 15px;
+    padding: 20px;
+    background-color: rgb(218, 30, 17);
+    color: white;
+    border-radius: 15px;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
+    transition: 0.3s;
+    padding: 16px;
+    cursor:pointer;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.9);
+}
+
+
+
+.button {
+  border-radius: 10px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+  padding: 20px;
+  width: 220px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+.button2{
+
+  font-size: 19px;
+  width: 160px;
+  height: 50px;
+  padding: 0px;
+  transition-duration: 0.4s;
+  overflow: hidden;
+  cursor: pointer;
+  background: #f8c96b;
+  border-right: 10px;
+}
+
+.button3{
+    position: relative;
+
+}
+
+.button3:after {
+    content: "";
+    background: #F2AE56;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.button3:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+#btn_terminar{
+	margin-left: 600px;
+}
+
+#btn_grande{
+  margin-left: 540px;
+  width: 220px;
+}
+
+#examinar{
+  font-size: 20px;
+}
+
+a{
+	color:white;
+	font-size: 30px;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #f8c96b;
+	text-decoration: underline;
+}
+
+.enlaceTabla{
+	font-size: 20px;
+}
+
+.tablaPartidas{
+
+  width: 65%;
+  padding: 20px;
+
+}
+
+.tablaPartidas td {
+
+  border: solid white;
+  text-align: center;
+  padding: 30px;
+
+}
+
+.tablaPartidas th{
+
+  border: solid white;
+  height: 15px;
+  background: brown;
+  padding: 20px;
+
+}
+
+.celdaPartida > td{
+  padding: 0px;
+}
+
+.botonCelda{
+  height: 50px;
+  border: none;
+}
+
+.tuTurno{
+  background: rgba(193, 157, 81, 0.85);
+}
+
+td > strong{
+  color: white;
+}
+
+hr {border: 3px solid #d1ab5e;
+ border-radius: 300px/10px; 
+ height: 0px; 
+ text-align: center;
+ margin-right: 28px;
+}
+
+#sin_rellenar{
+  font-size: 20px;
+  color: red;
+}
+
+.noexiste{
+  font-size: 25px;
+  color: orange;
+}
+
+.rol{
+  color: orange;
+}
+
+
+
+
+.tablero{
+  width: 600px;
+  height: 600px;
+  background: black;
+}
+
+.carta, .tablero img {
+  background: #ff7702;
+  width: 85px;
+  height: 85px;
+}
+
+.carta {
+  margin: 5px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.foto {
+  width: 70px;
+  height: 70px;
+  float:left;
+  margin-right: 20px;
+}
+.comentario{
+    background: rgba(248, 201, 107, 0.37);
+    border: solid 2px white;
+    padding: 10px;
+    margin: 8px;
+}

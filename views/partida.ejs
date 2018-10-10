@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+ 	<head>
+		<title>Saboteur - Partida</title>
+		<meta charset="utf­8"/>
+		<link rel="stylesheet" type="text/css" href="css/cssPrincipal.css">
+	</head>
+	<body>
+		<div id="header" >
+
+			<div class="iz">
+				<IMG id="imagentop" SRC="RecursosGraficosP1/Logo.png"></IMG>
+				
+			</div>
+			<div class="dr">
+				<div class="card" onclick="location.href = 'principal.html'">
+				    <img src="RecursosGraficosP1/img_avatar.png" alt="Avatar" id= "imgCard" >
+				    <% if (!usuario) { %>
+						<h2 id="conect">No estás conectado</h2>
+					<% } else { %>
+						<h2 id="conect"><%= usuario %></h2>
+					<% } %>
+				</div>
+				
+			</div>
+	    </div>
+	    <div id ="cinta">
+	    	<div > 
+	    		<div class="margizq">
+	    			<button class="button" onclick="location.href = 'desconectar.html'"><span>Desconectar</span></button>
+	    			<button class="button" onclick="location.href = 'unirse.html'"><span>Unirse a partida</span></button>
+	    			<button class="button" onclick="location.href = 'crear.html'"><span>Crear partida</span></button>
+	    		</div>
+	    	</div>
+	    </div>
+
+	    <div id ="bienvenida">
+
+			<%error.forEach(function(err){%>
+			<div class="alert">
+			  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+			  <%=err.msg%>
+			</div>
+			<%});%>
+
+	    	<div>
+	    		<h1 class="welcome">Partida: <%= partida.nombre %></h1>
+		    	
+		    	<p>Creada por: <%= partida.usuarioCreador%></p>
+		    	<p>Jugadores: <%= partida.jugadoresApuntados%></p>
+		    	<p>Turno de: <%= partida.turno%></p>
+		    	<p>Turnos restantes: <%= partida.turnosrestantes%></p>
+
+
+			    <%if(partida.ganador === null){%>
+			    	<h2 class="rol">Eres un <%= rol%></h2>
+			    <%} else {%>
+			    	<h2 class="rol">En esta partida fuiste <%= rol%></h2>
+			    <%}%>
+		    </div>
+
+
+		    <div>
+		    	<h1 class="welcome">Tablero</h1>
+
+		    	<table class = "tablero">
+		    	<%for(var i = 0; i < 7; i++){%>
+			    	<tr>
+			    		<%for(var j = 0; j < 7; j++){%>
+			    			<%if(tablero[i][j] === undefined){%>
+			    				<td><img src=""></td>
+			    			<%} else {%>
+			    				<td><img src="RecursosGraficosP1/<%=tablero[i][j].nombreCarta%>.png"></td>
+			    		<%}}%>
+			    	</tr>
+		    	<%}%>
+		    	
+		    	</table>
+
+		    </div>
+
+
+
+
+		    <%if(partida.ganador === null){%>
+			    <div>
+
+			    	<h1 class="welcome">Tus cartas</h1>
+
+
+					<% if(usuario !== partida.turno){ %>
+						<%for(var i = 0; i < 6; i++){%>
+							<%if(cartas[5] !== undefined){%>
+								<img class = "carta" src="RecursosGraficosP1/<%=cartas[i].nombreCarta%>.png">
+					<%}}%>
+
+			    		<p>Aun no es tu turno. Debes esperar para jugar una carta</p>
+
+
+
+
+					<% } else {%>
+						<%for(var i = 0; i < 6; i++){%>
+							<%if(cartas[i] !== undefined){%>
+								<img class = "carta clickable" src="RecursosGraficosP1/<%=cartas[i].nombreCarta%>.png"
+								onclick="location.href='carta.html?idPart=<%= partida.id%>&idCarta=<%=cartas[i].id%>&nombreCarta=<%=cartas[i].nombreCarta%>'" class="clickable">
+					<%}}}%>
+				    	
+
+			    </div>
+			<%}%>
+
+			<div>
+
+		    	<h1 class="welcome">Comentarios</h1>
+
+		    	<%comentarios.forEach(function(com){%>
+		    		<div class ="comentario">
+			    		<div>
+			    			<%if(com.foto !== null){%>
+			    				<img class="foto" src="/imagen/<%=com.id%>">
+			    			<%} else {%>
+			    				 <img class="foto" src="RecursosGraficosP1/img_avatar.png">
+		    				<%}%>
+		    				<h3><%=com.alias%></h3>
+		    				<p><%=com.fecha.getDay()%> - <%=(com.fecha.getMonth()+1)%> - <%=com.fecha.getFullYear()%></p>
+		    			</div>
+		    			
+		    			<p><%=com.descripcion%></p>
+		    		</div>
+		    	<%});%>
+
+		    	<form method="POST" action="comentar.html">
+			    	<div>
+						<h3>Introduce aqui tu comentario:</h3>
+						<input class="textbox" type="text" name= "texto" placeholder="Introduce tu comentario">
+					</div>
+					<input type="hidden" name="idPart" value = <%= partida.id%>>
+					<div>
+						<br>
+						<input type="submit" class="button2 button3"  id="btn_comentar" value="Comentar">
+					</div>
+				</form>
+
+			</div>
+
+			<div>
+				<br>
+				<a href="principal.html" class="iz">Volver a la página de usuario</a>
+			</div>
+
+
+	    </div>
+	</body>
+</html>
